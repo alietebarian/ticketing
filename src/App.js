@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import MainPage from "./MainPage";
+import SIdeBar from "./component/SIdeBar";
+import { QueryClient, QueryClientProvider } from "react-query";
 
-function App() {
+export default function App() {
+
+  const queryClient = new QueryClient();
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="p-1.5 flex">
+      <QueryClientProvider client={queryClient}>
+        <SIdeBar />
+        <MainPage />
+      </QueryClientProvider>
     </div>
   );
 }
-
-export default App;
