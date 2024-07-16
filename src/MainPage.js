@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Header from "./component/Header";
 import { CiSearch } from "react-icons/ci";
 import { useForm } from "react-hook-form";
 
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { SidebarContext } from "./component/Context";
+import { Link } from "react-router-dom";
 
 const fetchUser = async (page = 1, pageSize = 10) => {
   const { data } = await axios.get(
@@ -42,6 +44,9 @@ export default function MainPage() {
   const startIndex = (page - 1) * pageSize;
   const endIndex = startIndex + pageSize;
 
+  const { ticketClick } = useContext(SidebarContext);
+  console.log(ticketClick);
+
   return (
     <div className=" bg-gray-200 w-[85%]">
       <Header />
@@ -49,7 +54,7 @@ export default function MainPage() {
         <div className="flex justify-between items-center pb-7">
           <div>
             <button className="border-solid border-2 border-slate-400 p-2 px-3 bg-slate-400 rounded-sm font-bold">
-              New Ticket +
+              <Link to="/newticket">New Ticket +</Link>
             </button>
           </div>
           <div className="p-[20px] flex relative">
@@ -70,7 +75,7 @@ export default function MainPage() {
           </div>
         </div>
         <div className="overflow-x-auto w-full">
-          {isLoading ? (
+          {isLoading && ticketClick ? (
             <p>Loading...</p>
           ) : isError ? (
             <p>Error fetching data</p>

@@ -5,7 +5,6 @@ import { LuTicket } from "react-icons/lu";
 export default function SIdeBar() {
   const [dashClick, setDashClick] = useState(false);
   const [ticketClick, setTicketClick] = useState(false);
-
   return (
     <div className="w-[15%] h-[100vh] bg-white">
       <h1 className="text-2xl ml-8 mt-5">Ticketing system</h1>
@@ -26,14 +25,14 @@ export default function SIdeBar() {
             {dashClick && (
               <td
                 className={`ml-10 mt-3 flex p-2 rounded-md ${
-                  !ticketClick && "bg-slate-100"
+                  ticketClick && "bg-slate-100"
                 }`}
                 onClick={() => setTicketClick(!ticketClick)}
               >
                 <span className="font-normal text-2xl mr-2 mt-1">
                   <LuTicket />
                 </span>
-                <span className="ml-2 font-normal text-2xl">Tickets</span>
+                <span className="ml-2 font-normal text-2xl" onClick={() => setTicketClick(!ticketClick)}>Tickets</span>
               </td>
             )}
           </div>
