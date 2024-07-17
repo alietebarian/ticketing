@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { SidebarContext } from "./component/Context";
 import { Link } from "react-router-dom";
 
+
 const fetchUser = async (page = 1, pageSize = 10) => {
   const { data } = await axios.get(
     `https://gist.githubusercontent.com/alietebarian/d4c7cccf35687d221b62f67466bc9401/raw/b578ac170cf94b66f9f72a21eb171048fda782b8/gistfile1.txt?page=${page}&limit=${pageSize}`
@@ -45,7 +46,6 @@ export default function MainPage() {
   const endIndex = startIndex + pageSize;
 
   const { ticketClick } = useContext(SidebarContext);
-  console.log(ticketClick);
 
   return (
     <div className=" bg-gray-200 w-[85%]">
@@ -82,8 +82,8 @@ export default function MainPage() {
           ) : (
             <table className="max-w-[100%] overflow-x-auto w-full">
               <thead>
-                <tr className="bg-gray-100 text-gray-600">
-                  <th className="text-center px-6 py-4 text-left border-solid border-slate-400 border-2 bg-slate-300">
+                <tr className=" text-gray-600 ">
+                  <th className=" text-center px-6 py-4 text-left border-solid border-slate-400 border-2 bg-slate-300">
                     تاریخ
                   </th>
                   <th className="text-center px-6 py-4 text-left border-solid border-slate-400 border-2 bg-slate-300">
@@ -103,21 +103,24 @@ export default function MainPage() {
               <tbody>
                 {filteredData?.length !== 0 ? (
                   filteredData?.slice(startIndex, endIndex).map((item) => (
-                    <tr key={item.id}>
+                    <tr
+                      className="odd:bg-red-200 even:bg-blue-200"
+                      key={item.id}
+                    >
                       <td className="text-center px-6 py-4 text-left border-solid border-slate-400 border-2 bg-white">
-                        {item.date}
+                        <Link to={`/edit/${item.id}`}>{item.date}</Link>
                       </td>
                       <td className="text-center px-6 py-4 text-left border-solid border-slate-400 border-2 bg-white">
-                        {item.title}
+                        <Link to={`/edit/${item.id}`}>{item.title}</Link>
                       </td>
                       <td className="text-center px-6 py-4 text-left border-solid border-slate-400 border-2 bg-white">
-                        {item.status}
+                        <Link to={`/edit/${item.id}`}>{item.status}</Link>
                       </td>
                       <td className="text-center px-6 py-4 text-left border-solid border-slate-400 border-2 bg-white">
-                        {item.name}
+                        <Link to={`/edit/${item.id}`}>{item.name}</Link>
                       </td>
                       <td className="text-center px-6 py-4 text-left border-solid border-slate-400 border-2 bg-white">
-                        {item.number}
+                        <Link to={`/edit/${item.id}`}>{item.number}</Link>
                       </td>
                     </tr>
                   ))

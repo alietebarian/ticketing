@@ -6,18 +6,22 @@ import { SidebarProvider } from "./component/Context";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AddNewTicket from "./component/AddNewTicket";
 import HomePage from "./component/HomePage";
+import Edit from "./component/Edit";
 
 export default function App() {
   const queryClient = new QueryClient();
+
   return (
     <>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage/>}/>
-        <Route path="/newticket" element={<AddNewTicket/>} />
-        
-      </Routes>
-    </BrowserRouter>
-          </>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/newticket" element={<AddNewTicket />} />
+            <Route path="/edit/:id" element={<Edit />} />
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </>
   );
 }
